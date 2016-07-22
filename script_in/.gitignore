@@ -1,0 +1,5 @@
+# Folder used for recordings to be processed
+# Ignore everything in this directory
+*
+# Except this file
+!.gitignore
