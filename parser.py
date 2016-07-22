@@ -12,14 +12,18 @@ import utils
 
 
 
-
-LOGFILE = 'python_script.log'
-OUTPUTDIR = 'script_out'
-PLAYLIST = 'playlist.txt'
+#parameters
 USE_ORIENTATION_AVERAGE = True	#else use latest orientation
 USE_FULL_FILENAME_IN_PLAYLIST = False	#otherwise use only ID (without the OUT_ and .txt)
 LOG_STATISTICS = True
 CLEAR_LOG = True  	#When init log - delete previous logfile
+
+LOGFILE = 'python_script.log'
+OUTPUTDIR = 'script_out'
+INPUTDIR = 'script_in'
+PLAYLIST = 'playlist.txt'
+
+# global vars
 orient_count = 0		
 orient_start = 0
 orient_dur = 0
@@ -153,7 +157,7 @@ def reset_vars():
 #	returns only the file NAME (without the extension)
 #	of files in current folder having that extension
 def get_file_list(extension):
-	all_files = os.listdir()
+	all_files = os.listdir(INPUTDIR)
 	file_list = []
 	for file in all_files:
 		tmp_file = get_file_name(file, extension)
@@ -225,7 +229,7 @@ def process_file(filename):
 	global orient_obj
 	global orient_count
 #	create_file_out(filename)
-	with open(filename, 'r') as file_in:
+	with open(INPUTDIR+'/'+filename, 'r') as file_in:
 		if LOG_STATISTICS:
 			log_location_init()
 		for line in file_in:
